@@ -1,4 +1,4 @@
-/*jslint browser: true*/
+﻿/*jslint browser: true*/
 /*globals $, jQuery, alert, Uint8Array*/
 /*
  * password card generator
@@ -159,6 +159,33 @@ function giveCharOfGivenType(givenType) {
 
 }
 
+function colorize(givenType, text) {
+    "use strict";
+
+    var charToReturn = "";
+
+    switch (givenType) {
+    case "U":
+        charToReturn = "<span class = \"blackText\">" + text + "</span>";
+        break;
+    case "l":
+        charToReturn = "<span class = \"blueText\">" + text + "</span>";
+        break;
+    case "0":
+        charToReturn = "<span class = \"greenText\">" + text + "</span>";
+        break;
+    case "#":
+        charToReturn = "<span class = \"redText\">" + text + "</span>";
+        break;
+    default:
+        charToReturn = "";
+        break;
+    }
+    return charToReturn;
+
+}
+
+
 /*
  * the next four functions return a random character, each function
  * chooses the character at random out of its own set of characters.
@@ -225,7 +252,7 @@ function giveTriple() {
      * into the output:
      */
 
-    outputString = outputString + giveCharOfGivenType(typeKey);
+    outputString = outputString + colorize(typeKey, giveCharOfGivenType(typeKey));
 
     /*
      * we delete the choosen type from the urn, the urn now contains two types
@@ -242,7 +269,7 @@ function giveTriple() {
      * one character of the choosen type into the output string:
      */
     typeKey = urn.slice(toDraw, toDraw + 1);
-    outputString = outputString + giveCharOfGivenType(typeKey);
+    outputString = outputString + colorize(typeKey, giveCharOfGivenType(typeKey));
 
     /*
      * we delete the choosen one, the urn has one left
@@ -256,8 +283,7 @@ function giveTriple() {
      */
 
     typeKey = urn;
-    outputString = outputString + giveCharOfGivenType(typeKey);
-
+    outputString = outputString + colorize(typeKey, giveCharOfGivenType(typeKey));
     return outputString;
 }
 
